@@ -25,14 +25,16 @@ def modify_txt(text):
 
 
 profile = dict()
-def scrape_profile(url):
+def scrape_li_prof(url):
 
     driver = webdriver.Chrome()
     dl.login(driver, email, password)
 
     if url[-1]=='/':
+        time.sleep(1200)
         driver.get(f'{url}{contact_info}')
     else:
+        # time.sleep(2)
         driver.get(f'{url}"/"{contact_info}')
     profile['full_name']=driver.find_element(By.CSS_SELECTOR,f"h1.{full_name}").get_attribute('innerText')
     profile['headline']=modify_txt(driver.find_element(By.CSS_SELECTOR, "div.text-body-medium").get_attribute("innerText"))
